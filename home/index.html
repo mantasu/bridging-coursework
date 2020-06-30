@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">  
+  <link href="{% static 'index.css' %}" rel="stylesheet">
+  <title>Dashboard</title>
+</head>
+<body>
+  <div id="container">
+    <div id="img"></div>
+    <div id="overlay"></div>
+      <div id="menu" class="card">
+        <a href="/blog" class="btn">
+          <h1>Blog</h1>
+          <!-- More like <spam> -->
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+        <h5>Hint: double click the hypercube</h5>
+      </div>
+      <div id="hypermenu" class="card">
+
+        <table id="setup">
+            <tr><th>Dimension</th><th id="view-size">Size</th></tr>
+            <tr>
+              <td><div id="dimension"><input type="number" min="0" value="4"></td></div>
+              <td><div id="size"><input type="range" min="1" max="200" value="40"></div></td>
+            </tr>
+        </table>
+        
+        <table id="positions">
+            <tr><th>Axis</th><th>Auto</th><th id="view-apos">Absolute position</th><th id="view-rpos">Relative position</th></tr>
+            <tr>
+              <td><div class="name">X</div></td>
+              <td><div class="checkbox"><input type="checkbox" checked></div></td>
+              <td><div class="slider"><input type="range" min="0" max="1000" value="500" disabled></div></td>
+              <td><div class="slider"><input type="range" min="-1000" max="1000" value="0"></div></td>
+            </tr>
+            <tr>
+              <td><div class="name">Y</div></td>
+              <td><div class="checkbox"><input type="checkbox" checked></div></td>
+              <td><div class="slider"><input type="range" min="0" max="1000" value="750" disabled></div></td>
+              <td><div class="slider"><input type="range" min="-1000" max="1000" value="0"></div></td>
+            </tr>
+            <tr>
+              <td><div class="name">Z</div></td>
+              <td><div class="checkbox"><input type="checkbox" checked></div></td>
+              <td><div class="slider"><input type="range" min="0" max="1000" value="150" disabled></div></td>
+              <td><div class="slider"><input type="range" min="-1000" max="1000" value="0"></div></td>
+            </tr>
+            <tr>
+              <td><div class="name">W</div></td>
+              <td><div class="checkbox"><input type="checkbox" checked></div></td>
+              <td><div class="slider"><input type="range" min="0" max="1000" value="150" disabled></div></td>
+              <td><div class="slider"><input type="range" min="-1000" max="1000" value="0"></div></td>
+            </tr>
+        </table>
+
+        <div id="manage-axes">
+          <button>Remove axis</button>
+          <button>Add axis</button>
+        </div>
+
+        <div id="rotation-type">
+          <div class="type">
+            <input type="radio" id="absolute-rotation" name="rotation-type">
+            <label for="absolute-rotation">Absolute rotation</label>
+          </div>
+          <div class="type">
+            <input type="radio" id="relative-rotation" name="rotation-type" checked>
+            <label for="relative-rotation">Relative rotation</label>
+          </div>
+        </div>
+
+        <table id="rotations">
+          <tr><th>Axis</th><th id="view-rot">SO(n) rotation</th><th>Cont</th></tr>
+          <tr>
+            <td><div class="name">YX</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="0"></div></td>
+            <td><div class="checkbox"><input type="checkbox"></div></td>
+          </tr>
+          <tr>
+            <td><div class="name">ZX</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="60"></div></td>
+            <td><div class="checkbox"><input type="checkbox" checked></div></td>
+          </tr>
+          <tr>
+            <td><div class="name">ZY</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="0"></div></td>
+            <td><div class="checkbox"><input type="checkbox"></div></td>
+          </tr>
+          <tr>
+            <td><div class="name">WX</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="0"></div></td>
+            <td><div class="checkbox"><input type="checkbox"></div></td>
+          </tr>
+          <tr>
+            <td><div class="name">WY</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="60"></div></td>
+            <td><div class="checkbox"><input type="checkbox" checked></div></td>
+          </tr>
+          <tr>
+            <td><div class="name">WZ</div></td>
+            <td><div class="slider"><input type="range" min="-360" max="360" value="0"></div></td>
+            <td><div class="checkbox"><input type="checkbox"></div></td>
+          </tr>
+        </table>
+      </div>
+    <div id="cube0"></div>
+    <canvas></canvas>
+  </div>
+  <svg>
+    <defs>
+      <filter id="goo">
+        <feGaussianBlur stdDeviation='12'/>
+        <feColorMatrix 
+          values='1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 37 -15'/>
+        <feBlend in='SourceGraphic'/>
+      </filter>
+    </defs>
+  </svg>
+  <script type="module" src="{% static 'index.js' %}"></script>
+</body>
+</html>

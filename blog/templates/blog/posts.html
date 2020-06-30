@@ -1,0 +1,28 @@
+
+  <div id="carrousel">
+  {% for post in posts %}
+  <div class="post">
+    <div class="post-btn show-btn">
+      <h1>{{ post.title }}</h1>
+    </div>
+    <div class="post-cnt">
+      <div class="static-border"></div>
+      <div class="static-border"></div>
+      <div class="static-border"></div>
+      <div class="static-border"></div>
+      
+      <div class="block">
+        <div class="border-animation"><span></span></div>
+        <div class="border-animation"><span></span></div>
+        <div class="border-animation"><span></span></div>
+        <div class="border-animation"><span></span></div>
+
+        <h6 class="date"><b>Published:</b> <i>{{ post.published_date }}</i></h6>
+        <h1 class="title">{{ post.title }}</h1>
+        <div class="content">{% autoescape off %}{{ post.text|linebreaksbr }}{% endautoescape %}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+

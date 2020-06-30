@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block style %}<link rel="stylesheet" href="{{ css_path }}">{% endblock style %}
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <canvas id="stars"></canvas>
+    <canvas id="planet"></canvas>
+    {% include "blog/posts.html" %}
+  </div>
+{% endblock content %}
+
+{% block script %}<script type="module" src="{{ js_path }}"></script>{% endblock script %}
