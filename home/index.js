@@ -1,8 +1,6 @@
 import Hypercube from "./hypercube.js";
 import { Path, setLocal } from "./particles.js"; 
 
-// Not even gonna bother to comment here properly
-
 
 /* CSS */
 // MENU
@@ -29,7 +27,7 @@ const PARTICLE_DURATION = 2000;
 const PARTICLE_AMOUNT = 20;
 
 let timeStep = PARTICLE_DURATION / PARTICLE_AMOUNT;
-let container = document.querySelector('#container');
+let overlay = document.querySelector('#overlay');
 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -55,17 +53,17 @@ for(let i = 0; i < PARTICLE_AMOUNT; i++) {
   
   // One particle animation
   square.animate([
-    {transform: `scale(1.5) translate(${x}vw, ${y}vh)`, opacity: 1,},
-    {transform: `scale(.5) ${rotateX} ${rotateY}`,},
+    {transform: `scale(1.5) translate(${x}vw, ${y}vh) rotateX(0) rotateY(0)`, opacity: 1,},
+    {transform: `scale(.5) translate(0, 0) ${rotateX} ${rotateY}`, opacity: 0},
   ], {
     duration: PARTICLE_DURATION,
     delay: i*timeStep,
     endDelay: i*timeStep,
     easing: "cubic-bezier(.07,.48,.88,.49)",
     iterations: Infinity,
-  })
+  });
 
-  container.appendChild(square);
+  overlay.insertBefore(square, menu);
 }
 
 /* ELEMENTS */

@@ -46,7 +46,12 @@ posts.forEach((button, i) => {
 });
 
 // Add scroll event to get rotating menu functionality
-function scroll(e) { mouse.wheel += e.deltaY;}
+let swipeStart = 0;
+function scroll(e) { mouse.wheel += e.deltaY > 0 ? 4 : -4; }
+function swipe(e) { mouse.wheel += swipeStart - e.touches[0].cientY > 0 ? 4 : -4; }
+
+carrousel.addEventListener('touchstart', e => { swipeStart = e.touches[0].clientY; });
+carrousel.addEventListener('touchmove', swipe);
 carrousel.addEventListener('wheel', scroll);
 
 
@@ -59,6 +64,7 @@ posts.forEach((post, i) => {
       posts.forEach(btn => {btn.style.transition = "all 200ms cubic-bezier(.05,.73,.24,1.06)"; });
       post_cnt[i].classList.remove('show-cnt');
       carrousel.addEventListener('wheel', scroll);
+      carrousel.addEventListener('touchmove', swipe);
       posts[i].style.transform = `translateZ(${positionZ}vh`;
       posts.forEach((btn, j) => { if(i != j) btn.style.pointerEvents = 'auto'; });
       post_btn.forEach((btn, j) => { if(i != j) btn.classList.add('show-btn'); });
@@ -67,6 +73,7 @@ posts.forEach((post, i) => {
       rotatePostTo0(i);
       post_cnt[i].classList.add('show-cnt');
       carrousel.removeEventListener('wheel', scroll);
+      carrousel.removeEventListener('touchmove', swipe);
       posts[i].style.transform = 'translateZ(0)';
       posts.forEach((btn, j) => { if(i != j) btn.style.pointerEvents = 'none'; });
       post_btn.forEach((btn, j) => { if(i != j) btn.classList.remove('show-btn'); });
@@ -107,7 +114,7 @@ function animate() {
 
   if(Math.abs(mouse.wheel) > 0) {
     posts.forEach((post, i) => {
-      postAngles[i] += mouse.wheel * 2;
+      postAngles[i] += mouse.wheel;
       rotatePostTo(postAngles[i], i);
     });
   }
@@ -117,7 +124,7 @@ function animate() {
     star.draw(ctx);
   });
   
-  mouse.wheel *= .8;
+  mouse.wheel *= .7;
   if(Math.abs(mouse.wheel) < .01) mouse.wheel = 0;
 }
 
